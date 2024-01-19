@@ -1,9 +1,10 @@
-
+import { Outlet } from "react-router-dom";
+import "./bootstrap.min.css";
 const App = () => {
   return (
-    <div>
-      hello
-    </div>
+    <>
+      <Outlet></Outlet>
+    </>
   );
 };
 
