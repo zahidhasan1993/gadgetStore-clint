@@ -1,4 +1,7 @@
 import { Card, Col, Row } from "react-bootstrap";
+import { Rating } from "@smastrom/react-rating";
+
+import "@smastrom/react-rating/style.css";
 const LatestProducts = ({ products }) => {
   console.log(products);
   return (
@@ -19,8 +22,13 @@ const LatestProducts = ({ products }) => {
                   </Card.Title>
                 </a>
                 <Card.Text as="div">
-                  <div className="my-3">
-                    {product.rating} from {product.numReviews} reviews
+                  <div className="my-3 d-flex align-items-center gap-3">
+                    <Rating
+                      style={{ maxWidth: 80 }}
+                      value={product.rating}
+                      readOnly
+                    />
+                    {product.numReviews} reviews
                   </div>
                 </Card.Text>
                 <Card.Text as="h3">${product.price}</Card.Text>
