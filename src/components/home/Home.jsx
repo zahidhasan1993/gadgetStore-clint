@@ -1,16 +1,14 @@
-import Footer from "../shared/Footer";
-import Header from "../shared/Header";
 import { Container } from "react-bootstrap";
+import LatestProducts from "./LatestProducts";
+import products from "../../products.js";
 const Home = () => {
   return (
     <div>
-      <Header></Header>
       <main className="py-3">
         <Container>
-          <h1>This is home</h1>
+          <LatestProducts products={products}></LatestProducts>
         </Container>
       </main>
-      <Footer></Footer>
     </div>
   );
 };
