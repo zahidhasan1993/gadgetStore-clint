@@ -2,6 +2,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
+import { Link } from "react-router-dom";
 const LatestProducts = ({ products }) => {
   console.log(products);
   return (
@@ -11,16 +12,16 @@ const LatestProducts = ({ products }) => {
         {products.map((product) => (
           <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
             <Card className="my-3 p-3 rounded">
-              <a href={`/product/${product._id}`}>
+              <Link to={`/product/${product._id}`}>
                 <Card.Img src={product.image}></Card.Img>
-              </a>
+              </Link>
 
               <Card.Body>
-                <a href={`/product/${product._id}`}>
+                <Link to={`/product/${product._id}`}>
                   <Card.Title as="div">
                     <strong>{product.name}</strong>
                   </Card.Title>
-                </a>
+                </Link>
                 <Card.Text as="div">
                   <div className="my-3 d-flex align-items-center gap-3">
                     <Rating
