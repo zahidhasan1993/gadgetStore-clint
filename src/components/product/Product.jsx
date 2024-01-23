@@ -8,11 +8,19 @@ import {
   ListGroupItem,
   Row,
 } from "react-bootstrap";
-import products from "../../products.js";
 import { Link, useParams } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
+import { useEffect, useState } from "react";
 const Product = () => {
   const { id } = useParams();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
+
   const product = products.find((p) => p._id === id);
 
   console.log(product);
@@ -24,26 +32,26 @@ const Product = () => {
         </Link>
         <Row>
           <Col md={6}>
-            <Image src={product.image} alt="Product Image" fluid />
+            <Image src={product?.image} alt="Product Image" fluid />
           </Col>
           <Col md={3}>
             <ListGroup variant="flush">
               <ListGroupItem>
-                <h3>{product.name}</h3>
+                <h3>{product?.name}</h3>
               </ListGroupItem>
               <ListGroupItem className="">
                 <Rating
                   style={{ maxWidth: 100 }}
-                  value={product.rating}
+                  value={product?.rating}
                   readOnly
                 ></Rating>
-                <p>{product.numReviews} reviews</p>
+                <p>{product?.numReviews} reviews</p>
               </ListGroupItem>
               <ListGroupItem>
-                <h3>Price: ${product.price}</h3>
+                <h3>Price: ${product?.price}</h3>
               </ListGroupItem>
               <ListGroupItem>
-                <p>Description : {product.description}</p>
+                <p>Description : {product?.description}</p>
               </ListGroupItem>
             </ListGroup>
           </Col>
@@ -54,7 +62,7 @@ const Product = () => {
                   <Row>
                     <Col>Price:</Col>
                     <Col>
-                      <strong>${product.price}</strong>
+                      <strong>${product?.price}</strong>
                     </Col>
                   </Row>
                 </ListGroupItem>
@@ -63,7 +71,9 @@ const Product = () => {
                     <Col>Status:</Col>
                     <Col>
                       <strong>
-                        {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                        {product?.countInStock > 0
+                          ? "In Stock"
+                          : "Out Of Stock"}
                       </strong>
                     </Col>
                   </Row>
@@ -73,7 +83,7 @@ const Product = () => {
                     size="md"
                     className="w-100"
                     type="button"
-                    disabled={product.countInStock === 0}
+                    disabled={product?.countInStock === 0}
                   >
                     Add To Cart
                   </Button>

@@ -1,7 +1,16 @@
 import { Container } from "react-bootstrap";
 import LatestProducts from "./LatestProducts";
-import products from "../../products.js";
+import { useEffect, useState } from "react";
 const Home = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  console.log(products);
   return (
     <div>
       <main className="py-3">
