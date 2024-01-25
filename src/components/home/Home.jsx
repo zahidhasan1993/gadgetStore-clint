@@ -1,16 +1,17 @@
 import { Container } from "react-bootstrap";
 import LatestProducts from "./LatestProducts";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../../actions/productActions";
 const Home = () => {
-  const [products, setProducts] = useState([]);
-
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
   useEffect(() => {
-    fetch("http://localhost:3000/api/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+    dispatch(listProducts());
+  }, [dispatch]);
 
-  console.log(products);
+  console.log(productList);
+  const products = [];
   return (
     <div>
       <main className="py-3">
