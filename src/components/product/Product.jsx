@@ -3,6 +3,7 @@ import {
   Card,
   Col,
   Container,
+  Form,
   Image,
   ListGroup,
   ListGroupItem,
@@ -10,17 +11,22 @@ import {
 } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { detailsProduct } from "../../actions/productActions";
 import Spinner from "../shared/Spinner";
 import AlertMessage from "../shared/AlertMessage";
 
 const Product = () => {
+  const [qty, setQty] = useState(1);
+  // const history = unstable_HistoryRouter();
   const { id } = useParams();
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
+
+  // const addToCartHandler = () => {};
+
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [dispatch, id]);
@@ -86,15 +92,40 @@ const Product = () => {
                         </Col>
                       </Row>
                     </ListGroupItem>
+                    {product.countInStock > 0 && (
+                      <ListGroupItem>
+                        <Row>
+                          <Col>Qty</Col>
+                          <Col>
+                            <Form.Control
+                              as="select"
+                              value={qty}
+                              onChange={(e) => setQty(e.target.value)}
+                            >
+                              {[...Array(product.countInStock).keys()].map(
+                                (x) => (
+                                  <option key={x + 1} value={x + 1}>
+                                    {x + 1}
+                                  </option>
+                                )
+                              )}
+                            </Form.Control>
+                          </Col>
+                        </Row>
+                      </ListGroupItem>
+                    )}
                     <ListGroupItem>
-                      <Button
-                        size="md"
-                        className="w-100"
-                        type="button"
-                        disabled={product?.countInStock === 0}
-                      >
-                        Add To Cart
-                      </Button>
+                      <Link to={`/cart/${id}?qty=${qty}`}>
+                        <Button
+                          // onClick={addToCartHandler}
+                          size="md"
+                          className="w-100"
+                          type="button"
+                          disabled={product?.countInStock === 0}
+                        >
+                          Add To Cart
+                        </Button>
+                      </Link>
                     </ListGroupItem>
                   </ListGroup>
                 </Card>
