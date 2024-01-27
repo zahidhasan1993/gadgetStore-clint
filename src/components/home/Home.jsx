@@ -3,6 +3,8 @@ import LatestProducts from "./LatestProducts";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../../actions/productActions";
+import Spinner from "../shared/Spinner";
+import AlertMessage from "../shared/AlertMessage";
 const Home = () => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
@@ -19,9 +21,9 @@ const Home = () => {
       <main className="py-3">
         <Container>
           {loading ? (
-            <h2>Loading</h2>
+            <Spinner></Spinner>
           ) : error ? (
-            <h2>{error}</h2>
+            <AlertMessage variant="danger" message={error.message}></AlertMessage>
           ) : (
             <LatestProducts products={products}></LatestProducts>
           )}
