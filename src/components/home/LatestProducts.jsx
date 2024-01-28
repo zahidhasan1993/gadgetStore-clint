@@ -4,7 +4,7 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { Link } from "react-router-dom";
 const LatestProducts = ({ products }) => {
-  console.log(products);
+  // console.log(products);
   return (
     <>
       <h1>Latest Products</h1>
