@@ -14,7 +14,7 @@ const Home = () => {
     dispatch(listProducts());
   }, [dispatch]);
 
-  console.log(productList);
+  // console.log(productList);
 
   return (
     <div>
