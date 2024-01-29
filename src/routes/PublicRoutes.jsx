@@ -3,11 +3,14 @@ import App from "../App";
 import Home from "../components/home/Home";
 import Product from "../components/product/Product";
 import Cart from "../components/cart/Cart";
+import Login from "../components/login/Login";
+import Error from "../components/shared/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -21,6 +24,10 @@ export const router = createBrowserRouter([
         path: "/cart/:id?",
         element: <Cart></Cart>,
       },
+      {
+        path: "/login",
+        element: <Login></Login>
+      }
     ],
   },
 ]);

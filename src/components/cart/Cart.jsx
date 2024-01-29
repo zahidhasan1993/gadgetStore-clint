@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { addToCart } from "../../actions/cartActions";
+import { addToCart, removeFromCart } from "../../actions/cartActions";
 import { FaRegTrashCan } from "react-icons/fa6";
 
 import {
@@ -27,10 +27,10 @@ const Cart = () => {
   const { cartItems } = cart;
 
   const removeProduct = (id) => {
-    console.log(id);
+    dispatch(removeFromCart(id));
   };
   const checkoutHandler = () => {
-   console.log("paise");
+    console.log("paise");
   };
   useEffect(() => {
     if (id) {
