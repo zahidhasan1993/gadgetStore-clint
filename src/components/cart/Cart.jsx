@@ -6,6 +6,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 
 import {
   Button,
+  Card,
   Col,
   Container,
   Form,
@@ -27,14 +28,15 @@ const Cart = () => {
 
   const removeProduct = (id) => {
     console.log(id);
-  }
+  };
+  const checkoutHandler = () => {
+   console.log("paise");
+  };
   useEffect(() => {
     if (id) {
       dispatch(addToCart(id, qty));
     }
   }, [id, qty, dispatch]);
-
-  console.log(cartItems);
 
   return (
     <main>
@@ -88,8 +90,14 @@ const Cart = () => {
                         </Form.Control>
                       </Col>
                       <Col md={2}>
-                        <Button type="button" variant="light" onClick={() => {removeProduct(item.product)}}>
-                            <FaRegTrashCan />
+                        <Button
+                          type="button"
+                          variant="light"
+                          onClick={() => {
+                            removeProduct(item.product);
+                          }}
+                        >
+                          <FaRegTrashCan />
                         </Button>
                       </Col>
                     </Row>
@@ -98,8 +106,38 @@ const Cart = () => {
               </ListGroup>
             )}
           </Col>
-          <Col md={2}></Col>
-          <Col md={2}></Col>
+          <Col md={4}>
+            <Card>
+              <ListGroup variant="flush">
+                <ListGroupItem>
+                  <h2>
+                    Subtotal (
+                    {cartItems.reduce((acc, item) => acc + Number(item.qty), 0)}
+                    ) items
+                  </h2>
+                  <strong className="fs-5 font-weight-bold">
+                    Total Price : $
+                    {cartItems
+                      .reduce(
+                        (acc, item) => acc + Number(item.qty) * item.price,
+                        0
+                      )
+                      .toFixed(2)}
+                  </strong>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <Button
+                    type="button"
+                    className="btn-block w-100"
+                    disabled={cartItems.length === 0}
+                    onClick={checkoutHandler}
+                  >
+                    Proceed To Checkout
+                  </Button>
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
+          </Col>
         </Row>
       </Container>
     </main>
