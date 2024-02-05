@@ -12,7 +12,8 @@ export const login = (email, password) => async (dispatch) => {
 
         });
 
-        const data = res.json();
+        const data = await res.json();
+        // console.log(data);
 
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -23,7 +24,8 @@ export const login = (email, password) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload:
+                error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
