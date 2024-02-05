@@ -31,7 +31,7 @@ const Product = () => {
     dispatch(detailsProduct(id));
   }, [dispatch, id]);
 
-  console.log(product);
+  // console.log(product);
   return (
     <main>
       <Container className="my-3">
