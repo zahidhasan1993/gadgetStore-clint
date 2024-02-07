@@ -31,7 +31,7 @@ const Register = () => {
   const registerHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("PASSWORD DONT MATCH");
+      setMessage("PASSWORD DON'T MATCH");
     } else {
       dispatch(register(name, email, password));
     }
