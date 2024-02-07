@@ -5,6 +5,7 @@ import Product from "../components/product/Product";
 import Cart from "../components/cart/Cart";
 import Login from "../components/login/Login";
 import Error from "../components/shared/Error";
+import Register from "../components/login/Register";
 
 export const router = createBrowserRouter([
   {
@@ -26,8 +27,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login></Login>
-      }
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
     ],
   },
 ]);
